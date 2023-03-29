@@ -1,0 +1,30 @@
+{
+  "collectCoverageFrom": [
+    "<rootDir>/src/**/*.ts",
+    "!<rootDir>/src/**/*.spec.ts",
+    "!**/node_modules/**"
+  ],
+  "coverageDirectory": "<rootDir>/coverage-e2e",
+  "globalSetup": "<rootDir>/src/test/config/globalSetup.ts",
+  "globalTeardown": "<rootDir>/src/test/config/globalTeardown.ts",
+  "moduleFileExtensions": ["js", "json", "ts"],
+  "reporters": [
+    "default",
+    [
+      "jest-html-reporters",
+      {
+        "publicPath": "test-reports",
+        "filename": "e2e-test.html",
+        "expand": true,
+        "openReport": false
+      }
+    ]
+  ],
+  "rootDir": ".",
+  "setupFilesAfterEnv": ["<rootDir>/src/test/config/setupFile.ts"],
+  "testEnvironment": "node",
+  "testRegex": ".e2e-spec.ts$",
+  "transform": {
+    "^.+\\.(t|j)s$": "ts-jest"
+  }
+}

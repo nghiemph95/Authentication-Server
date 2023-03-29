@@ -1,0 +1,143 @@
+{
+  "name": "examTest",
+  "version": "1.0.0",
+  "author": "Nghiem Pham",
+  "private": true,
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "build": "cross-env NODE_ENV=production tsc -p tsconfig.build.json",
+    "start": "npm run start:prod",
+    "start:dev": "cross-env NODE_ENV=development ts-node-dev --respawn --transpile-only --clear ./src/main.ts --watch ./src",
+    "start:prod": "cross-env NODE_ENV=production node ./dist/main.js",
+    "test": "cross-env NODE_ENV=test jest",
+    "test:cov": "npm test -- --coverage",
+    "test:e2e": "npm test -- --config ./jest-e2e.json",
+    "test:cov:e2e": "npm run test:cov -- --config ./jest-e2e.json",
+    "postinstall": "husky install",
+    "format": "prettier --write ./src",
+    "lint": "eslint ./src --fix",
+    "review": "concurrently \"npm run format\" \"npm run lint\"",
+    "release": "standard-version -s -t '' --no-verify",
+    "release:target": "npm run release -- --release-as",
+    "release:patch": "npm run release:target patch",
+    "release:minor": "npm run release:target minor",
+    "release:major": "npm run release:target major"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.13.2",
+    "compression": "^1.7.4",
+    "config": "^3.3.8",
+    "cookie-parser": "^1.4.6",
+    "cross-env": "^7.0.3",
+    "express": "^4.18.1",
+    "express-jwt": "^8.4.1",
+    "helmet": "^6.0.0",
+    "http": "^0.0.1-security",
+    "http-status": "^1.5.3",
+    "js-yaml": "^4.1.0",
+    "jsonwebtoken": "^9.0.0",
+    "knex": "^2.4.2",
+    "lodash": "^4.17.21",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "mysql": "^2.18.1",
+    "v8-compile-cache": "^2.3.0",
+    "winston": "^3.8.2"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.1.2",
+    "@commitlint/config-conventional": "^17.1.0",
+    "@jest-mock/express": "^2.0.1",
+    "@types/bcrypt": "^5.0.0",
+    "@types/bcryptjs": "^2.4.2",
+    "@types/compression": "^1.7.2",
+    "@types/config": "^3.3.0",
+    "@types/cookie-parser": "^1.4.3",
+    "@types/express": "^4.17.14",
+    "@types/jest": "^29.1.1",
+    "@types/lodash": "^4.14.186",
+    "@types/morgan": "^1.9.3",
+    "@types/multer": "^1.4.7",
+    "@types/supertest": "^2.0.12",
+    "@types/validator": "^13.7.7",
+    "@wiitate/eslint-plugin": "^1.1.3",
+    "concurrently": "^7.4.0",
+    "eslint": "^8.24.0",
+    "husky": "^8.0.1",
+    "jest": "^29.1.2",
+    "jest-html-reporters": "^3.0.11",
+    "prettier": "^2.7.1",
+    "standard-version": "^9.5.0",
+    "supertest": "^6.2.4",
+    "ts-jest": "^29.0.3",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^4.8.4"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "<rootDir>/src/**/*.ts",
+      "!**/node_modules/**"
+    ],
+    "coverageDirectory": "<rootDir>/coverage",
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "reporters": [
+      "default",
+      [
+        "jest-html-reporters",
+        {
+          "publicPath": "test-reports",
+          "filename": "unit-test.html",
+          "expand": true,
+          "openReport": false
+        }
+      ]
+    ],
+    "rootDir": ".",
+    "testRegex": ".*\\.spec\\.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "testEnvironment": "node"
+  },
+  "standard-version": {
+    "compareUrlFormat": "https://gitlab.com/{{owner}}/{{repository}}/compare/{{previousTag}}...{{currentTag}}",
+    "commitUrlFormat": "https://gitlab.com/{{owner}}/{{repository}}/commit/{{hash}}",
+    "skip": {
+      "commit": true,
+      "tag": true
+    },
+    "types": [
+      {
+        "type": "feat",
+        "section": "Features"
+      },
+      {
+        "type": "feature",
+        "section": "Features"
+      },
+      {
+        "type": "fix",
+        "section": "Bug Fixes"
+      },
+      {
+        "type": "chore",
+        "section": "Chores"
+      },
+      {
+        "type": "refactor",
+        "section": "Refactors"
+      },
+      {
+        "type": "docs",
+        "section": "Docs"
+      }
+    ]
+  }
+}

@@ -1,0 +1,15 @@
+# for custom variables environment
+
+app:
+  env: NODE_ENV
+  name: APP_NAME
+  description: APP_DESCRIPTION
+  version: npm_package_version
+  baseUrl: BASE_URL
+
+server:
+  host: SERVER_HOST
+  port:
+    __name: SERVER_PORT
+    __format: json
+  protocol: SERVER_PROTOCOL

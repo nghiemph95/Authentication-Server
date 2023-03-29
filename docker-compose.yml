@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    image: template/expressjs-typescript-template:dev
+    container_name: app
+    networks:
+      - app-network
+    environment:
+      - NODE_ENV=production
+      - TZ=Asia/Ho_Chi_Minh
+      - SERVER_PORT=4200
+    ports:
+      - 4200:4200
+
+  mysql:
+    image: mysql:latest
+    container_name: db-server
+    restart: on-failure
+    networks:
+      - app-net
+    environment:
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+      - MYSQL_USER=century
+      - MYSQL_PASSWORD=12345678
+      - MYSQL_DATABASE=century_restaurant
+    ports:
+      - 3306:3306
+    volumes:
+      - db-config:/etc/mysql
+      - db-data:/var/lib/mysql
+      - ./.docker-data/db/backup/:/data_backup/data
+
+
+networks:
+  app-network:
+    driver: bridge
